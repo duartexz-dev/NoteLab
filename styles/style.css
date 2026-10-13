@@ -1,0 +1,215 @@
+:root {
+  --paper: #f3efe5;
+  --white-warm: #faf8f2;
+  --ink: #302d28;
+  --olive: #69725a;
+  --stone: #d6cdbf;
+  --terracotta: #a66f52;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  transition: opacity 0.5s ease;
+}
+
+.serif-title {
+  font-family: "Source Serif 4", serif;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.slogan {
+  font-family: "Source Serif 4", serif;
+  font-style: italic;
+  color: var(--olive);
+  font-size: 1.05rem;
+}
+
+.notelab-card {
+  background-color: var(--white-warm);
+  border: 1px solid var(--stone);
+  border-radius: 6px;
+  box-shadow: 0 4px 24px rgba(48, 45, 40, 0.03);
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem;
+}
+
+.form-control {
+  background-color: var(--white-warm);
+  border: 1px solid var(--stone);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.form-control:focus {
+  background-color: var(--white-warm);
+  color: var(--ink);
+  border-color: var(--olive);
+  box-shadow: 0 0 0 2px rgba(105, 114, 90, 0.15);
+}
+
+.form-label {
+  font-size: 0.875rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.btn-notelab {
+  background-color: var(--ink);
+  color: var(--paper);
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  border: none;
+  width: 100%;
+  transition:
+    background-color 0.25s ease,
+    transform 0.1s ease;
+}
+
+.btn-notelab:hover {
+  background-color: #423e38;
+  color: var(--paper);
+}
+
+.btn-notelab:active {
+  transform: scale(0.99);
+}
+
+.notelab-link {
+  color: var(--olive);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.notelab-link:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.feedback-msg {
+  font-size: 0.85rem;
+  color: var(--olive);
+  min-height: 1.2rem;
+  margin-top: 0.75rem;
+  text-align: center;
+}
+.loading-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  background-color: #f3efe5;
+  color: #302d28;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 18px;
+
+  font-family: "Inter", sans-serif;
+}
+
+.loader {
+  width: 34px;
+  height: 34px;
+
+  border: 3px solid #d6cdbf;
+  border-top-color: #69725a;
+  border-radius: 50%;
+
+  animation: loading 0.8s linear infinite;
+}
+
+.loading-screen p {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+@keyframes loading {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Exibe a tela quando necessário */
+.loading-screen.active {
+  display: flex;
+}
+.custom-alert {
+  display: none;
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 10000;
+
+  width: min(360px, calc(100% - 32px));
+  padding: 18px;
+
+  background: #faf8f2;
+  color: #302d28;
+
+  border: 1px solid #d6cdbf;
+  border-left: 4px solid #69725a;
+  border-radius: 8px;
+
+  box-shadow: 0 8px 24px rgba(48, 45, 40, 0.08);
+
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+
+  font-family: "Inter", sans-serif;
+}
+
+.custom-alert.active {
+  display: flex;
+}
+
+.alert-content strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.alert-content p {
+  margin: 0;
+  color: #66705d;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.alert-close {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #66705d;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.alert-close:hover {
+  color: #302d28;
+}

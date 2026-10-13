@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteLab — Biblioteca de Pensamento</title>
+    <!-- Fonts: Source Serif 4 & Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --paper-bg: #F3EFE5;
+            --paper-gradient: linear-gradient(135deg, #F6F3EB 0%, #EBE5D8 100%);
+            --ink: #302D28;
+            --ink-muted: #625E56;
+            --olive: #69725A;
+            --olive-light: rgba(105, 114, 90, 0.12);
+            --terracotta: #A66F52;
+            --stone: #D6CDBF;
+            --stone-subtle: rgba(214, 205, 191, 0.45);
+            --glass-card: rgba(250, 248, 242, 0.72);
+            --glass-nav: rgba(243, 239, 229, 0.82);
+            --glass-border: rgba(255, 255, 255, 0.65);
+            --shadow-soft: 0 12px 32px -8px rgba(48, 45, 40, 0.06);
+            --shadow-hover: 0 18px 40px -10px rgba(48, 45, 40, 0.12);
+            --radius-main: 16px;
+            --radius-sm: 8px;
+        }
+
+        body {
+            background: var(--paper-bg);
+            background-image:
+                radial-gradient(at 10% 10%, rgba(255, 255, 255, 0.6) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(105, 114, 90, 0.05) 0px, transparent 50%),
+                var(--paper-gradient);
+            background-attachment: fixed;
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .serif-title {
+            font-family: 'Source Serif 4', serif;
+            font-weight: 500;
+            color: var(--ink);
+            letter-spacing: -0.015em;
+        }
+
+        .mono-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: var(--glass-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-soft);
+            border-radius: var(--radius-main);
+        }
+
+        .navbar-notelab {
+            background: var(--glass-nav);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--stone-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            padding: 0.85rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand-notelab {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .brand-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--ink);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--paper-bg);
+        }
+
+        .nav-link-notelab {
+            color: var(--ink-muted);
+            font-size: 0.925rem;
+            font-weight: 500;
+            padding: 0.5rem 0.9rem !important;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .nav-link-notelab:hover,
+        .nav-link-notelab.active {
+            color: var(--ink);
+            background: var(--olive-light);
+        }
+
+        .btn-notelab-primary {
+            background: var(--ink);
+            color: var(--paper-bg);
+            border: none;
+            padding: 0.55rem 1.15rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-notelab-primary:hover {
+            background: #45413A;
+            color: var(--paper-bg);
+            transform: translateY(-1px);
+        }
+
+        .welcome-header {
+            padding: 2.5rem 0 1.5rem 0;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input-glass {
+            width: 100%;
+            background: var(--glass-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--stone);
+            color: var(--ink);
+            font-size: 0.95rem;
+            padding: 0.9rem 1.25rem 0.9rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            transition: all 0.25s ease;
+        }
+
+        .search-input-glass:focus {
+            outline: none;
+            border-color: var(--olive);
+            box-shadow: 0 0 0 3px var(--olive-light), 0 6px 20px rgba(0, 0, 0, 0.04);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .search-icon-svg {
+            position: absolute;
+            left: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            stroke: var(--olive);
+            width: 18px;
+            height: 18px;
+            pointer-events: none;
+        }
+
+        .filter-chip {
+            background: var(--glass-card);
+            border: 1px solid var(--stone);
+            color: var(--ink-muted);
+            font-size: 0.825rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .filter-chip:hover,
+        .filter-chip.active {
+            border-color: var(--olive);
+            background: var(--olive);
+            color: var(--paper-bg);
+        }
+
+        .note-card {
+            background: var(--glass-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .note-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--stone);
+            background: rgba(255, 255, 255, 0.88);
+        }
+
+        .note-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+            text-decoration: none;
+            display: block;
+        }
+
+        .note-card-excerpt {
+            color: var(--ink-muted);
+            font-size: 0.925rem;
+            line-height: 1.6;
+            margin-bottom: 1.1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .note-card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--ink-muted);
+            border-top: 1px solid var(--stone-subtle);
+            padding-top: 0.8rem;
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            color: var(--stone);
+            padding: 0;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .bookmark-btn.active,
+        .bookmark-btn:hover {
+            color: var(--terracotta);
+        }
+
+        .sidebar-widget {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .widget-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--ink-muted);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mini-graph-canvas {
+            width: 100%;
+            height: 180px;
+            background: rgba(243, 239, 229, 0.5);
+            border-radius: 10px;
+            border: 1px dashed var(--stone);
+        }
+
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--stone-subtle);
+            font-size: 0.875rem;
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(48, 45, 40, 0.3);
+            backdrop-filter: blur(4px);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer-panel {
+            position: fixed;
+            top: 0;
+            right: -550px;
+            width: 100%;
+            max-width: 540px;
+            height: 100%;
+            background: var(--paper-bg);
+            border-left: 1px solid var(--stone);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+            z-index: 1060;
+            transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 2.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .drawer-overlay.active .drawer-panel {
+            right: 0;
+        }
+
+        /* Discrete Notification Toast */
+        .quiet-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--ink);
+            color: var(--paper-bg);
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+            pointer-events: none;
+        }
+
+        .quiet-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-notelab">
+        <div class="container">
+            <a class="navbar-brand-notelab" href="#">
+                <div class="brand-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                </div>
+                NoteLab
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#notelabNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="notelabNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+                    <li class="nav-item"><a class="nav-link-notelab active" href="#">Início</a></li>
+                    <li class="nav-item"><a class="nav-link-notelab" href="#">Biblioteca</a></li>
+                    <li class="nav-item"><a class="nav-link-notelab" href="#">Grafo (Brain)</a></li>
+                    <li class="nav-item"><a class="nav-link-notelab" href="#">Etiquetas</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn-notelab-primary" id="btnNewNote">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Nova Anotação
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <div class="row g-4">
+            <!-- Main Content Area -->
+            <div class="col-lg-8">
+
+                <!-- Welcome Section -->
+                <header class="welcome-header">
+                    <h1 class="serif-title display-6 mb-1">Seu espaço de pensamento.</h1>
+                    <p class="text-muted mb-0" style="font-size: 1.05rem;">Um lugar para pensar com calma e cultivar
+                        conexões.</p>
+                </header>
+
+                <!-- Search and Filters Bar -->
+                <div class="search-container">
+                    <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="searchInput" class="search-input-glass"
+                        placeholder="Pesquisar por palavras-chave, conceitos ou etiquetas..." autocomplete="off">
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 mb-4" id="tagFilters">
+                    <span class="filter-chip active" data-tag="all">Todas as notas</span>
+                    <span class="filter-chip" data-tag="filosofia">#filosofia</span>
+                    <span class="filter-chip" data-tag="psicologia">#psicologia</span>
+                    <span class="filter-chip" data-tag="foco">#foco</span>
+                    <span class="filter-chip" data-tag="metodologia">#metodologia</span>
+                    <span class="filter-chip" data-tag="fav">★ Favoritas</span>
+                </div>
+
+                <!-- Notes List -->
+                <div id="notesContainer">
+                    <!-- Note Item 1 -->
+                    <article class="note-card" data-tags="filosofia etica" data-fav="true" data-id="1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <a href="#" class="serif-title note-card-title">O que significa viver bem?</a>
+                            <button class="bookmark-btn active" title="Favoritar"><svg width="18" height="18"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg></button>
+                        </div>
+                        <p class="note-card-excerpt">A atenção não é apenas um recurso cognitivo; é a forma primária
+                            através da qual construímos a nossa relação com o mundo. Segundo Aristóteles na Ética a
+                            Nicômaco, o bem supremo é a eudaimonia...</p>
+                        <div class="note-card-meta">
+                            <div>
+                                <span class="mono-tag text-muted me-2">12 OUT 2026</span>
+                                <span class="badge bg-light text-dark border me-1">#filosofia</span>
+                                <span class="badge bg-light text-dark border">#ética</span>
+                            </div>
+                            <span class="text-muted">4 min de leitura</span>
+                        </div>
+                    </article>
+
+                    <!-- Note Item 2 -->
+                    <article class="note-card" data-tags="psicologia foco" data-fav="false" data-id="2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <a href="#" class="serif-title note-card-title">Observações sobre atenção e foco
+                                contínuo</a>
+                            <button class="bookmark-btn" title="Favoritar"><svg width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg></button>
+                        </div>
+                        <p class="note-card-excerpt">Registros de leitura sobre a fragmentação da atenção na
+                            modernidade. A escassez de silêncio gera cansaço mental crônico e impede o aprofundamento
+                            criativo.</p>
+                        <div class="note-card-meta">
+                            <div>
+                                <span class="mono-tag text-muted me-2">08 OUT 2026</span>
+                                <span class="badge bg-light text-dark border me-1">#psicologia</span>
+                                <span class="badge bg-light text-dark border">#foco</span>
+                            </div>
+                            <span class="text-muted">6 min de leitura</span>
+                        </div>
+                    </article>
+
+                    <!-- Note Item 3 -->
+                    <article class="note-card" data-tags="filosofia metodologia" data-fav="true" data-id="3">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <a href="#" class="serif-title note-card-title">A arquitetura de um segundo cérebro</a>
+                            <button class="bookmark-btn active" title="Favoritar"><svg width="18" height="18"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg></button>
+                        </div>
+                        <p class="note-card-excerpt">Como organizar notas sem transformar o ato de pensar em uma tarefa
+                            burocrática de categorização compulsiva. A utilidade das conexões orgânicas e dos grafos
+                            simples.</p>
+                        <div class="note-card-meta">
+                            <div>
+                                <span class="mono-tag text-muted me-2">28 SET 2026</span>
+                                <span class="badge bg-light text-dark border me-1">#metodologia</span>
+                                <span class="badge bg-light text-dark border">#filosofia</span>
+                            </div>
+                            <span class="text-muted">8 min de leitura</span>
+                        </div>
+                    </article>
+                </div>
+
+                <div id="emptyMessage" class="text-center py-5 d-none">
+                    <p class="serif-title text-muted fs-5">Nenhuma anotação encontrada com esses critérios.</p>
+                    <p class="small text-muted">Experimente ajustar sua busca ou selecionar outra etiqueta.</p>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <!-- Brain / Graph Quick Preview Widget -->
+                <div class="glass-panel sidebar-widget">
+                    <div class="widget-title">
+                        <span>Visão do Grafo</span>
+                        <small class="mono-tag text-muted">32 NÓS</small>
+                    </div>
+                    <canvas id="miniGraphCanvas" class="mini-graph-canvas mb-3"></canvas>
+                    <p class="small text-muted mb-0">Conexões ativas e tópicos recorrentes no seu espaço de estudo.</p>
+                </div>
+
+                <!-- Quiet Stats Widget -->
+                <div class="glass-panel sidebar-widget">
+                    <div class="widget-title">
+                        <span>Resumo do Acervo</span>
+                    </div>
+                    <div class="stat-badge">
+                        <span class="text-muted">Total de anotações</span>
+                        <strong class="serif-title">28</strong>
+                    </div>
+                    <div class="stat-badge">
+                        <span class="text-muted">Conexões mapeadas</span>
+                        <strong class="serif-title">64</strong>
+                    </div>
+                    <div class="stat-badge">
+                        <span class="text-muted">Última atualização</span>
+                        <span class="mono-tag">Hoje, 14:20</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="drawer-overlay" id="drawerOverlay">
+        <div class="drawer-panel" id="drawerPanel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <span class="mono-tag text-muted" id="drawerMeta">DETALHES DA NOTA</span>
+                <button class="btn-close" id="closeDrawerBtn" aria-label="Fechar"></button>
+            </div>
+            <h2 class="serif-title mb-3" id="drawerTitle">Título da Nota</h2>
+            <div class="mb-3 d-flex gap-2" id="drawerTags"></div>
+            <hr class="my-3" style="border-color: var(--stone);">
+            <div class="text-muted" id="drawerBody" style="line-height: 1.8; font-size: 1rem;">
+                Conteúdo completo da nota...
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiet Notification Toast -->
+    <div class="quiet-toast" id="quietToast">Ação realizada com sucesso</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const tagChips = document.querySelectorAll('.filter-chip');
+            const noteCards = document.querySelectorAll('.note-card');
+            const emptyMessage = document.getElementById('emptyMessage');
+            const drawerOverlay = document.getElementById('drawerOverlay');
+            const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+            const quietToast = document.getElementById('quietToast');
+
+            let activeTag = 'all';
+
+            // Show discrete toast notification
+            function showToast(message) {
+                quietToast.textContent = message;
+                quietToast.classList.add('show');
+                setTimeout(() => {
+                    quietToast.classList.remove('show');
+                }, 2200);
+            }
+
+            // Real-time Search and Tag Filter
+            function filterNotes() {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                noteCards.forEach(card => {
+                    const title = card.querySelector('.note-card-title').textContent.toLowerCase();
+                    const excerpt = card.querySelector('.note-card-excerpt').textContent.toLowerCase();
+                    const tags = card.getAttribute('data-tags') || '';
+                    const isFav = card.getAttribute('data-fav') === 'true';
+
+                    const matchesQuery = query === '' || title.includes(query) || excerpt.includes(query) || tags.includes(query);
+                    let matchesTag = true;
+
+                    if (activeTag === 'fav') {
+                        matchesTag = isFav;
+                    } else if (activeTag !== 'all') {
+                        matchesTag = tags.includes(activeTag);
+                    }
+
+                    if (matchesQuery && matchesTag) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    emptyMessage.classList.remove('d-none');
+                } else {
+                    emptyMessage.classList.add('d-none');
+                }
+            }
+
+            searchInput.addEventListener('input', filterNotes);
+
+            tagChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    tagChips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    activeTag = chip.getAttribute('data-tag');
+                    filterNotes();
+                    showToast(`Filtro aplicado: ${chip.textContent}`);
+                });
+            });
+
+            // Bookmark Toggle
+            document.querySelectorAll('.bookmark-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = btn.closest('.note-card');
+                    const isFav = card.getAttribute('data-fav') === 'true';
+
+                    if (isFav) {
+                        card.setAttribute('data-fav', 'false');
+                        btn.classList.remove('active');
+                        btn.querySelector('svg').setAttribute('fill', 'none');
+                        showToast('Removido dos favoritos');
+                    } else {
+                        card.setAttribute('data-fav', 'true');
+                        btn.classList.add('active');
+                        btn.querySelector('svg').setAttribute('fill', 'currentColor');
+                        showToast('Adicionado aos favoritos');
+                    }
+                });
+            });
+
+            // Quick View Drawer Modal
+            noteCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const title = card.querySelector('.note-card-title').textContent;
+                    const excerpt = card.querySelector('.note-card-excerpt').textContent;
+
+                    document.getElementById('drawerTitle').textContent = title;
+                    document.getElementById('drawerBody').textContent = excerpt + " [Modo de leitura rápida do NoteLab. O editor completo oferece conexões detalhadas e visualização de grafos.]";
+
+                    drawerOverlay.classList.add('active');
+                });
+            });
+
+            closeDrawerBtn.addEventListener('click', () => {
+                drawerOverlay.classList.remove('active');
+            });
+
+            drawerOverlay.addEventListener('click', (e) => {
+                if (e.target === drawerOverlay) {
+                    drawerOverlay.classList.remove('active');
+                }
+            });
+
+            document.getElementById('btnNewNote').addEventListener('click', () => {
+                showToast('Nova folha de anotação criada.');
+            });
+
+            const canvas = document.getElementById('miniGraphCanvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                function drawGraph() {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+
+                    const nodes = [
+                        { x: canvas.width * 0.3, y: canvas.height * 0.4 },
+                        { x: canvas.width * 0.6, y: canvas.height * 0.3 },
+                        { x: canvas.width * 0.7, y: canvas.height * 0.7 },
+                        { x: canvas.width * 0.35, y: canvas.height * 0.75 }
+                    ];
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // Draw connections
+                    ctx.strokeStyle = '#D6CDBF';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[0].x, nodes[0].y);
+                    ctx.lineTo(nodes[1].x, nodes[1].y);
+                    ctx.lineTo(nodes[2].x, nodes[2].y);
+                    ctx.lineTo(nodes[3].x, nodes[3].y);
+                    ctx.lineTo(nodes[0].x, nodes[0].y);
+                    ctx.stroke();
+
+                    // Draw nodes
+                    nodes.forEach(node => {
+                        ctx.fillStyle = '#69725A';
+                        ctx.beginPath();
+                        ctx.arc(node.x, node.y, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                }
+                drawGraph();
+                window.addEventListener('resize', drawGraph);
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
