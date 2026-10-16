@@ -34,7 +34,8 @@
                         autocomplete="current-password">
                 </div>
 
-                <button id="btn" type="submit" class="btn btn-notelab mb-2" id="submitBtn">Entrar no espaço</button>
+                <button id="btn" type="submit" class="btn btn-notelab mb-2" id="submitBtn"
+                    onclick="createAccount()">Entrar no espaço</button>
 
                 <div id="feedback" class="feedback-msg" aria-live="polite"></div>
 
@@ -44,17 +45,35 @@
             </div>
         </div>
     </div>
-    <div id="loadingScreen" style="display: none;">
-        Carregando...
+
+    <!-- Tela de carregamento -->
+    <div id="loadingScreen" class="loading-screen" role="status" aria-live="polite" aria-label="Carregando conteúdo"
+        aria-busy="true">
+        <div class="loading-brand">
+            <span class="loading-mark" aria-hidden="true">N.</span>
+            <span>NoteLab</span>
+        </div>
+
+        <div class="loading-caption">
+            <div class="loader" aria-hidden="true"></div>
+            <p id="loadingMessage">Preparando seu espaço</p>
+        </div>
     </div>
+
+    <!-- Notificação personalizada -->
+
     <div id="customAlert" class="custom-alert" role="alert">
         <div class="alert-content">
             <strong id="alertTitle">Aviso</strong>
-            <p id="alertMessage">Email ou senha Inválidos.</p>
+            <p id="alertMessage">Email ou senha inválidos.</p>
         </div>
 
-        <button class="alert-close" onclick="closeAlert()" aria-label="Fechar alerta">&times;</button>
+        <button class="alert-close" onclick="closeAlert()" aria-label="Fechar">
+            &times;
+        </button>
     </div>
+
+
     <script src="./Js/script.js"></script>
 </body>
 

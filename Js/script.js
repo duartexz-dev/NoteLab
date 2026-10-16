@@ -1,32 +1,52 @@
 function createAccount() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let btn = document.getElementById("btn").value;
-    let load = document.getElementById("loadingScreen")
-    const alert = document.getElementById("customAlert");
+    let senha = document.getElementById("password").value
 
-    if (email.includes("@") && email.includes(".") && password.lenght >= 8) {
+    let email = document.getElementById("email").value
 
-        load.style.display = "flex"
-
-        setTimeout(function () {
-            load.style.display = "none"
-            location.href = "./src/home.html";
-
-        }, 2000);
+    if (!senha || !email) {
+        showAlert("AVISO", "Senha ou Email inválidos.")
+    } else if (senha.lenght < 8 || !email.includes("@gamil.com")) {
+        showAlert("AVISO", "Senha ou Email inválidos.")
     } else {
-        load.style.display = "flex"
-        setTimeout(function () {
-            alert.style.display = "flex"
-        }, 2000);
+        showAlert("AVISO", "Conta criada com sucesso.")
+        localStorage.setItem("emailSalvo", "email")
+        localStorage.setItem("senhaSalva", "senha")
     }
 
+}
+function showAlert(titulo, mensagem) {
+    let alerthtml = document.getElementById("customAlert");
+    let title = document.getElementById("alertTitle");
+    let message = document.getElementById("alertMessage");
 
+    title.innerText = titulo
+    message.innerText = mensagem
+    alerthtml.style.display = "flex"
 
 }
+function showlOADING() {
+    const loading = document.getElementById("loadingScreen");
+    setTimeout(() => {
+        loading.style.display = "flex"
+    }, 1500);
+}
 
-function closeAlert() {
-    const alert = document.getElementById("customAlert");
-    alert.style.display = "none"
+function btnCOLOR(typeERROR) {
+    let btn = document.getElementById("btn");
+    if (typeERROR === "bad") {
+        setTimeout(() => {
+            btn.style.backgroundColor = "red"
+            setTimeout(() => {
+                btn.style.backgroundColor = "black"
+            }, 1000);
+        }, 500);
+    } else {
+        setTimeout(() => {
+            btn.style.backgroundColor = "green"
+            setTimeout(() => {
+                btn.style.backgroundColor = "black"
+            }, 1000);
+        }, 500);
+    }
 
 }
