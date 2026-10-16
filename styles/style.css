@@ -1,41 +1,70 @@
+/* =========================
+   VARIÁVEIS E CONFIGURAÇÕES GLOBAIS
+========================= */
 :root {
   --paper: #f3efe5;
-  --white-warm: #faf8f2;
+  --paper-light: #faf8f2;
+  --paper-dark: #e8e0d2;
+
   --ink: #302d28;
+  --ink-soft: #716b60;
+
   --olive: #69725a;
+  --olive-dark: #505944;
+
   --stone: #d6cdbf;
+  --border: #d6cdbf;
   --terracotta: #a66f52;
+
+  --shadow: 0 12px 36px rgba(48, 45, 40, 0.1);
+  --font-ui: "Inter", sans-serif;
 }
 
 body {
   background-color: var(--paper);
   color: var(--ink);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-ui);
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0;
+
+  /* REMOVEMOS o display: flex daqui para os itens não ficarem presos ao centro */
+  display: flex;
+  flex-direction: column; /* Organiza tudo em coluna (um em cima do outro) */
+  justify-content: space-between; /* Empurra o footer para o rodapé da página */
+  align-items: stretch;
+
   transition: opacity 0.5s ease;
 }
 
+/* Criamos um container para centralizar apenas o cartão de login */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* =========================
+   TIPOGRAFIA & COMPONENTES BASE
+========================= */
 .serif-title {
-  font-family: "Source Serif 4", serif;
+  font-family: "Source Serif 4", Georgia, serif;
   font-weight: 500;
   color: var(--ink);
   letter-spacing: -0.01em;
 }
 
 .slogan {
-  font-family: "Source Serif 4", serif;
+  font-family: "Source Serif 4", Georgia, serif;
   font-style: italic;
   color: var(--olive);
   font-size: 1.05rem;
 }
 
 .notelab-card {
-  background-color: var(--white-warm);
-  border: 1px solid var(--stone);
+  background-color: var(--paper-light);
+  border: 1px solid var(--border);
   border-radius: 6px;
   box-shadow: 0 4px 24px rgba(48, 45, 40, 0.03);
   width: 100%;
@@ -44,10 +73,10 @@ body {
 }
 
 .form-control {
-  background-color: var(--white-warm);
-  border: 1px solid var(--stone);
+  background-color: var(--paper-light);
+  border: 1px solid var(--border);
   color: var(--ink);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-ui);
   font-size: 0.95rem;
   padding: 0.75rem 1rem;
   border-radius: 4px;
@@ -57,10 +86,11 @@ body {
 }
 
 .form-control:focus {
-  background-color: var(--white-warm);
+  background-color: var(--paper-light);
   color: var(--ink);
   border-color: var(--olive);
   box-shadow: 0 0 0 2px rgba(105, 114, 90, 0.15);
+  outline: none;
 }
 
 .form-label {
@@ -73,12 +103,13 @@ body {
 .btn-notelab {
   background-color: var(--ink);
   color: var(--paper);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-ui);
   font-weight: 500;
   padding: 0.75rem 1rem;
   border-radius: 4px;
   border: none;
   width: 100%;
+  cursor: pointer;
   transition:
     background-color 0.25s ease,
     transform 0.1s ease;
@@ -112,42 +143,22 @@ body {
   margin-top: 0.75rem;
   text-align: center;
 }
-:root {
-  --paper: #f3efe5;
-  --paper-light: #faf8f2;
-  --paper-dark: #e8e0d2;
-
-  --ink: #302d28;
-  --ink-soft: #716b60;
-
-  --olive: #69725a;
-  --olive-dark: #505944;
-
-  --border: #d6cdbf;
-  --shadow: 0 12px 36px rgba(48, 45, 40, 0.1);
-
-  --font-ui: "Inter", sans-serif;
-}
 
 /* =========================
    LOADING SCREEN
 ========================= */
-
 .loading-screen {
   display: none;
   position: fixed;
   inset: 0;
   z-index: 9999;
-
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 22px;
-
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-ui);
-
   opacity: 0;
   animation: loadingFadeIn 0.25s ease forwards;
 }
@@ -160,7 +171,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-
   font-family: Georgia, "Times New Roman", serif;
   font-size: 22px;
   letter-spacing: -0.5px;
@@ -169,16 +179,12 @@ body {
 .loading-mark {
   display: grid;
   place-items: center;
-
   width: 34px;
   height: 34px;
-
   border: 1px solid var(--border);
   border-radius: 8px;
-
   background: var(--paper-light);
   color: var(--olive);
-
   font-family: Georgia, "Times New Roman", serif;
   font-size: 20px;
 }
@@ -186,18 +192,15 @@ body {
 .loader {
   width: 30px;
   height: 30px;
-
   border: 2px solid var(--paper-dark);
   border-top-color: var(--olive);
   border-right-color: var(--olive);
-
   border-radius: 50%;
   animation: loadingSpin 0.85s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
 }
 
 .loading-screen p {
   margin: 0;
-
   color: var(--ink-soft);
   font-size: 12px;
   letter-spacing: 1.2px;
@@ -212,20 +215,39 @@ body {
 }
 
 /* =========================
-   CUSTOM ALERT
+   ALERT OVERLAY & CUSTOM ALERT (CENTRALIZADO COM BLUR)
 ========================= */
+.alert-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(48, 45, 40, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+.alert-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
 
 .custom-alert {
   position: fixed;
-  top: 24px;
-  right: 24px;
-  z-index: 10000;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
 
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 12px;
 
-  width: min(370px, calc(100vw - 32px));
+  width: min(380px, calc(100% - 32px));
   padding: 20px;
 
   background: var(--paper-light);
@@ -240,34 +262,32 @@ body {
 
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-8px);
+  pointer-events: none;
+  transform: translate(-50%, calc(-50% + 35px)) scale(0.96);
 
   transition:
-    opacity 0.22s ease,
-    transform 0.22s ease,
-    visibility 0.22s ease;
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.35s ease;
 }
 
 .custom-alert.active {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .alert-icon {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-
   width: 30px;
   height: 30px;
-
   border: 1px solid var(--border);
   border-radius: 8px;
-
   background: var(--paper);
   color: var(--olive-dark);
-
   font-family: Georgia, "Times New Roman", serif;
   font-size: 17px;
 }
@@ -280,20 +300,18 @@ body {
 
 .alert-content strong {
   display: block;
-  margin-bottom: 7px;
-
+  margin-bottom: 5px;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1.3;
 }
 
 .alert-content p {
   margin: 0;
-
   color: var(--ink-soft);
   font-size: 13px;
-  line-height: 1.65;
+  line-height: 1.5;
   overflow-wrap: anywhere;
 }
 
@@ -301,22 +319,17 @@ body {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-
   width: 28px;
   height: 28px;
   margin: -4px -5px 0 0;
   padding: 0;
-
   border: 1px solid transparent;
   border-radius: 6px;
-
   background: transparent;
   color: var(--ink-soft);
-
   font: inherit;
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1;
-
   cursor: pointer;
   transition:
     color 0.2s ease,
@@ -336,9 +349,8 @@ body {
 }
 
 /* =========================
-   ANIMATIONS
+   ANIMAÇÕES
 ========================= */
-
 @keyframes loadingSpin {
   to {
     transform: rotate(360deg);
@@ -352,13 +364,10 @@ body {
 }
 
 /* =========================
-   RESPONSIVE
+   RESPONSIVIDADE E ACESSIBILIDADE
 ========================= */
-
 @media (max-width: 480px) {
   .custom-alert {
-    top: 16px;
-    right: 16px;
     width: calc(100vw - 32px);
     padding: 16px;
   }
@@ -369,7 +378,8 @@ body {
     animation-duration: 2s;
   }
 
-  .custom-alert {
+  .custom-alert,
+  .alert-overlay {
     transition: none;
   }
 
@@ -378,62 +388,24 @@ body {
     opacity: 1;
   }
 }
-
-.custom-alert {
-  display: none;
+/* Fundo que cobre TUDO o que está atrás do alerta com blur */
+.alert-overlay {
   position: fixed;
-  top: 24px;
-  right: 24px;
-  z-index: 10000;
+  inset: 0;
+  z-index: 9998; /* Fica abaixo do alerta (9999), mas acima de todo o resto da página */
 
-  width: min(340px, calc(100% - 32px));
-  padding: 16px;
+  background: rgba(48, 45, 40, 0.4); /* Escurece levemente a tela toda */
+  backdrop-filter: blur(6px); /* Aplica o blur em TUDO atrás */
+  -webkit-backdrop-filter: blur(6px);
 
-  background: #faf8f2;
-  color: #302d28;
-
-  border: 1px solid #d6cdbf;
-  border-left: 3px solid #69725a;
-  border-radius: 6px;
-
-  box-shadow: 0 6px 20px rgba(48, 45, 40, 0.06);
-
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-
-  font-family: "Inter", sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
 }
 
-.custom-alert.active {
-  display: flex;
-}
-
-.alert-content strong {
-  display: block;
-  margin-bottom: 5px;
-
-  font-family: Georgia, serif;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.alert-content p {
-  margin: 0;
-  color: #716b60;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.alert-close {
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: #716b60;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.alert-close:hover {
-  color: #302d28;
+.alert-overlay.active {
+  opacity: 1;
+  visibility: visible;
 }

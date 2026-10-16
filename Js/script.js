@@ -4,31 +4,54 @@ function createAccount() {
     let email = document.getElementById("email").value
 
     if (!senha || !email) {
+        btnCOLOR("bad")
+        showlOADING()
+        showAlert("AVISO", "Para entrar no site , é necessário que você preencha todas as informações.")
+
+    } else if (senha.length < 8 || !email.includes("@gmail.com")) {
+        btnCOLOR("bad")
+        showlOADING()
         showAlert("AVISO", "Senha ou Email inválidos.")
-    } else if (senha.lenght < 8 || !email.includes("@gamil.com")) {
-        showAlert("AVISO", "Senha ou Email inválidos.")
+
     } else {
-        showAlert("AVISO", "Conta criada com sucesso.")
+        btnCOLOR("good")
+        showlOADING()
+        setTimeout(() => {
+            window.location.href = "./src/home.html"
+        }, 1000)
+
         localStorage.setItem("emailSalvo", "email")
         localStorage.setItem("senhaSalva", "senha")
+
+
+
     }
 
 }
 function showAlert(titulo, mensagem) {
-    let alerthtml = document.getElementById("customAlert");
-    let title = document.getElementById("alertTitle");
-    let message = document.getElementById("alertMessage");
+    const alertHtml = document.getElementById("customAlert");
+    const overlay = document.querySelector(".alert-overlay");
+    const title = document.getElementById("alertTitle");
+    const message = document.getElementById("alertMessage");
 
-    title.innerText = titulo
-    message.innerText = mensagem
-    alerthtml.style.display = "flex"
+    setTimeout(() => {
+        if (title) title.innerText = titulo;
+        if (message) message.innerText = mensagem;
+
+        if (alertHtml) alertHtml.classList.add("active");
+        if (overlay) overlay.classList.add("active");
+
+    }, 1200);
 
 }
 function showlOADING() {
     const loading = document.getElementById("loadingScreen");
     setTimeout(() => {
         loading.style.display = "flex"
-    }, 1500);
+        setTimeout(() => {
+            loading.style.display = "none"
+        }, 1000);
+    }, 200);
 }
 
 function btnCOLOR(typeERROR) {
@@ -39,14 +62,20 @@ function btnCOLOR(typeERROR) {
             setTimeout(() => {
                 btn.style.backgroundColor = "black"
             }, 1000);
-        }, 500);
+        }, 10);
     } else {
         setTimeout(() => {
             btn.style.backgroundColor = "green"
             setTimeout(() => {
                 btn.style.backgroundColor = "black"
             }, 1000);
-        }, 500);
+        }, 20);
     }
 
+}
+function closeAlert() {
+    const alertHtml = document.getElementById("customAlert");
+    const overlay = document.querySelector(".alert-overlay");
+    if (overlay) overlay.classList.remove("active");
+    if (alertHtml) alertHtml.classList.remove("active");
 }

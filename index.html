@@ -15,32 +15,35 @@
 </head>
 
 <body>
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="notelab-card">
-            <div class="text-center mb-4">
-                <h1 class="serif-title fs-2 mb-1">NoteLab</h1>
-                <p class="slogan mb-0">Um lugar para pensar com calma.</p>
-            </div>
-
-            <div id="loginForm" novalidate>
-                <div class="mb-3">
-                    <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="seu@email.com" required
-                        autocomplete="email">
-                </div>
-                <div class="mb-4">
-                    <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="password" placeholder="••••••••" required
-                        autocomplete="current-password">
+    <!-- Envolvemos o card de login para mantê-lo centralizado -->
+    <div class="main-wrapper">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="notelab-card">
+                <div class="text-center mb-4">
+                    <h1 class="serif-title fs-2 mb-1">NoteLab</h1>
+                    <p class="slogan mb-0">Um lugar para pensar com calma.</p>
                 </div>
 
-                <button id="btn" type="submit" class="btn btn-notelab mb-2" id="submitBtn"
-                    onclick="createAccount()">Entrar no espaço</button>
+                <div id="loginForm" novalidate>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="email" placeholder="seu@email.com" required
+                            autocomplete="email">
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="password" placeholder="••••••••" required
+                            autocomplete="current-password">
+                    </div>
 
-                <div id="feedback" class="feedback-msg" aria-live="polite"></div>
+                    <button id="btn" type="submit" class="btn btn-notelab mb-2" onclick="createAccount()">Entrar no
+                        espaço</button>
 
-                <div class="text-center mt-3 pt-3 border-top" style="border-color: var(--stone) !important;">
-                    <a href="#" class="notelab-link" id="createAccountLink">Primeira vez? Criar conta</a>
+                    <div id="feedback" class="feedback-msg" aria-live="polite"></div>
+
+                    <div class="text-center mt-3 pt-3 border-top" style="border-color: var(--stone) !important;">
+                        <a href="#" class="notelab-link" id="createAccountLink">Primeira vez? Criar conta</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +63,8 @@
         </div>
     </div>
 
-    <!-- Notificação personalizada -->
+    <!-- Notificação personalizada com overlay de blur -->
+    <div class="alert-overlay"></div>
 
     <div id="customAlert" class="custom-alert" role="alert">
         <div class="alert-content">
@@ -72,6 +76,8 @@
             &times;
         </button>
     </div>
+
+
 
 
     <script src="./Js/script.js"></script>
