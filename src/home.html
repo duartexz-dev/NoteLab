@@ -168,7 +168,7 @@
     aria-hidden="true">
     <div class="editor-top"><span class="editor-label" id="editorMode">NOVA ANOTAÇÃO</span><button class="button-icon"
         id="closeEditorBtn" aria-label="Fechar editor">×</button></div>
-    <form class="editor-main" id="noteForm">
+    <form class="editor-main" id="noteForm" novalidate>
       <input type="hidden" id="noteId">
       <label class="visually-hidden" for="noteTitleInput">Título da nota</label>
       <textarea class="editor-title" id="noteTitleInput" rows="2" maxlength="140"
@@ -181,17 +181,45 @@
         placeholder="Comece por aqui. Não precisa estar perfeito — basta registrar o pensamento."></textarea>
       <p class="editor-hint">Conecte suas notas escrevendo <code>[[título exato de outra nota]]</code> no texto. Separe
         as etiquetas por vírgulas.</p>
-      <div class="editor-bottom"><label class="favorite-toggle"><input type="checkbox" id="noteFavoriteInput"> <span>☆
+      <div class="editor-bottom"><label class="favorite-toggle"><input type="checkbox" id="meuChecklist"> <span>☆
             Guardar nas favoritas</span></label>
         <div class="editor-actions"><button type="button" class="button button-danger" id="deleteNoteBtn"
             hidden>Excluir</button><button type="button" class="button button-soft"
-            id="cancelEditorBtn">Cancelar</button><button type="submit" class="button button-primary">Salvar
+            id="cancelEditorBtn">Cancelar</button><button type="submit" class="button button-primary"
+            onclick="addnote()">Salvar
             nota</button></div>
       </div>
     </form>
   </section>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="js/app.js" defer></script>
+  <!-- Notificação personalizada com overlay de blur -->
+  <div class="alert-overlay"></div>
+
+  <div id="customAlert" class="custom-alert" role="alert">
+    <div class="alert-content">
+      <strong id="alertTitle">Aviso</strong>
+      <p id="alertMessage">Email ou senha inválidos.</p>
+    </div>
+
+    <button class="alert-close" onclick="closeAlert()" aria-label="Fechar">
+      &times;
+    </button>
+  </div>
+  <div id="loadingScreen" class="loading-screen" role="status" aria-live="polite" aria-label="Carregando conteúdo"
+    aria-busy="true">
+    <div class="loading-brand">
+      <span class="loading-mark" aria-hidden="true">N.</span>
+      <span>NoteLab</span>
+    </div>
+
+    <div class="loading-caption">
+      <div class="loader" aria-hidden="true"></div>
+      <p id="loadingMessage">Preparando seu espaço</p>
+    </div>
+  </div>
+
+
+  <script src="../Js/home.js" defer></script>
 </body>
 
 </html>

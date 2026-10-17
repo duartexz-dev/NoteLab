@@ -1,3 +1,24 @@
+
+//comando que identifica quando o user entra no site//
+document.addEventListener("DOMContentLoaded", function () {
+    login();
+});
+
+function login() {
+    const senhaSalva = localStorage.getItem("senhaSalva");
+    const emailSalvo = localStorage.getItem("emailSalva");
+
+    if (senhaSalva && emailSalvo) {
+        showlOADING()
+        setTimeout(() => {
+            window.location.href = "./src/home.html"
+        }, 1000)
+    } else {
+        showlOADING()
+
+    }
+}
+
 function createAccount() {
     let senha = document.getElementById("password").value
 
@@ -20,8 +41,8 @@ function createAccount() {
             window.location.href = "./src/home.html"
         }, 1000)
 
-        localStorage.setItem("emailSalvo", "email")
-        localStorage.setItem("senhaSalva", "senha")
+        localStorage.setItem("emailSalva", email)
+        localStorage.setItem("senhaSalva", senha)
 
 
 
