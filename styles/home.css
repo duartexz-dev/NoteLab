@@ -10,7 +10,7 @@
   --olive-wash: #e7e9df;
   --stone: #d6cdbf;
   --stone-light: rgba(214, 205, 191, 0.52);
-  --terracotta: #a66f52;
+  --terracotta: #a87052;
   --shadow: 0 16px 42px rgba(48, 45, 40, 0.08);
   --shadow-soft: 0 4px 20px rgba(48, 45, 40, 0.035);
   --radius: 14px;
@@ -34,6 +34,10 @@ body {
     radial-gradient(at 5% 0%, rgba(255, 255, 255, 0.65), transparent 36%),
     radial-gradient(at 100% 100%, rgba(105, 114, 90, 0.055), transparent 38%);
   -webkit-font-smoothing: antialiased;
+}
+/* A mágica acontece aqui */
+html.modo-inverso {
+  filter: invert(1) hue-rotate(180deg);
 }
 button,
 input,

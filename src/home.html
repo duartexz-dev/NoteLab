@@ -1,225 +1,381 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <meta name="theme-color" content="#f3efe5">
+
   <meta name="description"
     content="NoteLab — um espaço calmo para registrar ideias, organizar referências e conectar pensamentos.">
+
   <title>NoteLab — Biblioteca de pensamento</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap"
     rel="stylesheet">
+
   <link rel="stylesheet" href="../styles/home.css">
+
 </head>
 
 <body>
+
   <div class="app-shell">
+
     <aside class="sidebar" id="sidebar">
+
       <div class="sidebar-head">
+
         <a class="brand" href="#inicio" aria-label="NoteLab, início" id="brandHome">
+
           <span class="brand-mark" aria-hidden="true">n.</span><span class="brand-name">NoteLab</span>
+
         </a>
+
         <button class="button-icon mobile-menu" id="mobileMenuBtn" aria-label="Abrir menu"
           aria-expanded="false">☰</button>
+
       </div>
+
       <div class="brand-subtitle">Biblioteca de pensamento</div>
+
       <p class="side-label">Seu espaço</p>
+
       <nav class="nav-list" aria-label="Navegação principal">
+
         <button class="nav-item active" data-view="overview"><span class="nav-symbol">⌂</span> Visão geral</button>
+
         <button class="nav-item" data-view="all"><span class="nav-symbol">▤</span> Todas as notas <span
             class="nav-count" id="allCount">0</span></button>
+
         <button class="nav-item" data-view="favorites"><span class="nav-symbol">☆</span> Favoritas <span
             class="nav-count" id="favoriteCount">0</span></button>
+
         <a class="nav-item nav-item-link" href="brain-notes.html"><span class="nav-symbol">◎</span> Brain Notes <span
             class="nav-arrow" aria-hidden="true">↗</span></a>
+
         <button class="nav-item" data-view="tags"><span class="nav-symbol">#</span> Etiquetas</button>
+        <button id="btn-backgroundMode" class="nav-item" data-view="tags"><span class="nav-symbol">☾</span> dark
+          Mode</button>
+
       </nav>
+
       <p class="side-label">Biblioteca</p>
-      <div class="nav-list" style="display:grid">
+
+      <div class="nav-list nav-utility-list">
+
         <button class="nav-item" id="exportBtn"><span class="nav-symbol">↓</span> Exportar backup</button>
+
         <button class="nav-item" id="importBtn"><span class="nav-symbol">↑</span> Importar backup</button>
+
         <input class="visually-hidden" type="file" id="importFile" accept="application/json,.json">
+
       </div>
+
       <div class="sidebar-bottom">
+
         <div class="storage-note"><span class="storage-dot"></span>
+
           <div><strong>Salvo neste dispositivo</strong>Suas notas ficam neste navegador. Ainda não há sincronização
+
             entre dispositivos.</div>
+
         </div>
+
       </div>
+
     </aside>
 
     <main class="main-area" id="inicio">
+
       <header class="topbar">
+
         <div class="crumbs">Seu espaço / <strong id="breadcrumbTitle">Visão geral</strong></div>
+
         <div class="top-actions">
+
           <label class="search-mini"><span class="visually-hidden">Pesquisar notas</span><input type="search"
               id="searchInput" placeholder="Buscar nas suas notas…" autocomplete="off"><span class="search-key">⌘
+
               K</span></label>
-          <button class="button button-primary" id="newNoteBtn"><span aria-hidden="true">＋</span> Nova nota</button>
+
+          <button type="button" class="button button-primary" id="newNoteBtn"><span aria-hidden="true">＋</span> Nova
+            nota</button>
+
         </div>
+
       </header>
 
       <div class="content">
+
         <section class="welcome">
+
           <div>
+
             <p class="eyebrow" id="welcomeEyebrow">UM ESPAÇO PARA PENSAR</p>
+
             <h1 id="welcomeTitle">Suas ideias merecem<br>um lugar para crescer.</h1>
-            <p class="welcome-sub" id="welcomeSubtitle">Registre o que importa. Encontre de novo. Descubra conexões.</p>
+
+            <p class="welcome-sub" id="welcomeSubtitle">Anote agora. Encontre quando precisar.</p>
+
           </div>
-          <div class="date-note" id="todayDate">SEXTA-FEIRA<br>16 OUTUBRO 2026</div>
+
+          <div class="date-note" id="todayDate">DOMINGO<br>18 OUTUBRO 2026</div>
+
         </section>
 
         <section class="stats-grid" aria-label="Resumo da biblioteca">
+
           <article class="stat-card">
+
             <div class="stat-label"><span>▤</span> Notas guardadas</div><strong class="stat-value"
               id="statNotes">0</strong>
+
             <div class="stat-detail">Seu acervo pessoal</div>
+
           </article>
+
           <article class="stat-card">
+
             <div class="stat-label"><span>☆</span> Favoritas</div><strong class="stat-value"
               id="statFavorites">0</strong>
+
             <div class="stat-detail">Ideias para revisitar</div>
+
           </article>
+
           <article class="stat-card">
+
             <div class="stat-label"><span>#</span> Etiquetas</div><strong class="stat-value" id="statTags">0</strong>
+
             <div class="stat-detail">Temas que se repetem</div>
+
           </article>
-          <article class="stat-card">
-            <div class="stat-label"><span>↗</span> Conexões</div><strong class="stat-value" id="statLinks">0</strong>
-            <div class="stat-detail">Relações entre suas notas</div>
-          </article>
+          <span id="statLinks" class="visually-hidden" aria-hidden="true">0</span>
+
         </section>
 
         <div class="workspace">
+
           <section class="notes-section" aria-labelledby="notesHeading">
+
             <div class="section-head">
+
               <div>
-                <h2 class="section-title" id="notesHeading">Notas recentes</h2>
-                <p class="section-sub" id="notesSubheading">Tudo o que você registrou, em um só lugar.</p>
+
+                <h2 class="section-title" id="notesHeading">Suas notas</h2>
+
+                <p class="section-sub" id="notesSubheading">Tudo o que você guardou, em um só lugar.</p>
+
               </div>
+
               <select class="sort-select" id="sortSelect" aria-label="Ordenar notas">
+
                 <option value="updated">Mais recentes</option>
+
                 <option value="created">Mais antigas</option>
+
                 <option value="title">Título A–Z</option>
+
               </select>
+
             </div>
+
             <div class="filter-row" id="filterRow" aria-label="Filtros rápidos">
+
               <button class="filter-chip active" data-tag="all">Todas</button>
-              <button class="filter-chip" data-tag="filosofia"># filosofia</button>
-              <button class="filter-chip" data-tag="psicologia"># psicologia</button>
-              <button class="filter-chip" data-tag="estudos"># estudos</button>
+
               <button class="filter-chip" data-tag="favorites">☆ Favoritas</button>
+
             </div>
+
             <div class="notes-grid" id="notesGrid"></div>
+
             <div class="empty-state" id="emptyState" hidden>
+
               <div class="empty-icon">⌕</div>
+
               <h3 id="emptyTitle">Ainda não há notas por aqui.</h3>
+
               <p id="emptyDescription">Crie sua primeira nota e comece a construir sua biblioteca de ideias.</p><button
                 class="button button-primary" id="emptyCreateBtn">＋ Criar uma nota</button>
+
             </div>
+
           </section>
 
           <aside class="side-panel" aria-label="Visão da biblioteca">
-            <section class="widget">
+
+            <section class="widget retired-widget" aria-hidden="true">
+
               <div class="widget-head">
+
                 <h2 class="widget-title">Mapa de ideias</h2><span class="widget-kicker" id="graphCount">0 NÓS</span>
+
               </div>
+
               <div class="graph-wrap"><canvas id="graphCanvas"
                   aria-label="Mapa interativo das conexões entre notas. Clique em um ponto para abrir a nota correspondente."
                   role="img" tabindex="0"></canvas></div>
+
               <p class="graph-caption">Cada ponto representa uma nota. As linhas mostram etiquetas em comum ou
+
                 referências escritas como <code>[[título da nota]]</code>.</p>
+
               <div class="graph-help"><span class="legend-dot"></span> <span>Selecione um ponto para abrir a
+
                   nota.</span></div>
+
             </section>
+
             <section class="widget">
+
               <div class="widget-head">
+
                 <h2 class="widget-title">Suas etiquetas</h2><button class="widget-link" id="clearTagBtn">Limpar
+
                   filtro</button>
+
               </div>
+
               <div class="tag-list" id="tagList"></div>
+
             </section>
-            <section class="widget">
+
+            <section class="widget retired-widget" aria-hidden="true">
+
               <div class="widget-head">
+
                 <h2 class="widget-title">Atualizadas por último</h2>
+
               </div>
+
               <div id="recentList"></div>
+
             </section>
-            <section class="widget principle">
-              <blockquote>“Um bom sistema não pensa por você. Ele ajuda a voltar às ideias certas.”</blockquote>
-              <p>Uma ideia do NoteLab</p>
-            </section>
+
           </aside>
+
         </div>
+
         <footer class="app-footer"><span>NoteLab · Um espaço para organizar o pensamento.</span>
+
           <div class="footer-links"><button id="howItWorksBtn">Como funciona</button><button id="backupFooterBtn">Fazer
+
               backup</button></div>
+
         </footer>
+
       </div>
+
     </main>
+
   </div>
 
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
-  <section class="editor-drawer" id="editorDrawer" role="dialog" aria-modal="true" aria-labelledby="editorMode"
-    aria-hidden="true">
+
+  <section class="editor-drawer" id="editorDrawer" role="dialog" aria-modal="true" aria-labelledby="editorMode">
+
     <div class="editor-top"><span class="editor-label" id="editorMode">NOVA ANOTAÇÃO</span><button class="button-icon"
         id="closeEditorBtn" aria-label="Fechar editor">×</button></div>
+
     <form class="editor-main" id="noteForm" novalidate>
+
       <input type="hidden" id="noteId">
+
       <label class="visually-hidden" for="noteTitleInput">Título da nota</label>
+
       <textarea class="editor-title" id="noteTitleInput" rows="2" maxlength="140"
         placeholder="Dê um título à sua ideia…" required></textarea>
+
       <label class="editor-tags-label" for="noteTagsInput">ETIQUETAS</label>
+
       <input class="editor-tags" id="noteTagsInput" type="text" maxlength="180"
         placeholder="filosofia, leituras, ideias">
+
       <label class="editor-body-label" for="noteBodyInput">SUA NOTA</label>
+
       <textarea class="editor-body" id="noteBodyInput"
         placeholder="Comece por aqui. Não precisa estar perfeito — basta registrar o pensamento."></textarea>
+
       <p class="editor-hint">Conecte suas notas escrevendo <code>[[título exato de outra nota]]</code> no texto. Separe
+
         as etiquetas por vírgulas.</p>
+
       <div class="editor-bottom"><label class="favorite-toggle"><input type="checkbox" id="meuChecklist"> <span>☆
+
             Guardar nas favoritas</span></label>
+
         <div class="editor-actions"><button type="button" class="button button-danger" id="deleteNoteBtn"
             hidden>Excluir</button><button type="button" class="button button-soft"
-            id="cancelEditorBtn">Cancelar</button><button type="submit" class="button button-primary"
-            onclick="addnote()">Salvar
+            id="cancelEditorBtn">Cancelar</button><button type="submit" class="button button-primary">Salvar
+
             nota</button></div>
+
       </div>
+
     </form>
+
   </section>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <!-- Notificação personalizada com overlay de blur -->
+
   <div class="alert-overlay"></div>
 
   <div id="customAlert" class="custom-alert" role="alert">
+
     <div class="alert-content">
+
       <strong id="alertTitle">Aviso</strong>
-      <p id="alertMessage">Email ou senha inválidos.</p>
+
+      <p id="alertMessage">Confira as informações e tente novamente.</p>
+
     </div>
 
     <button class="alert-close" onclick="closeAlert()" aria-label="Fechar">
+
       &times;
+
     </button>
+
   </div>
+
   <div id="loadingScreen" class="loading-screen" role="status" aria-live="polite" aria-label="Carregando conteúdo"
     aria-busy="true">
+
     <div class="loading-brand">
-      <span class="loading-mark" aria-hidden="true">N.</span>
-      <span>NoteLab</span>
+
+      <a class="brand" href="#inicio" aria-label="NoteLab, início" id="loadingBrandHome">
+
+        <span class="brand-mark" aria-hidden="true">n.</span><span class="brand-name">NoteLab</span>
+
+      </a>
+
     </div>
 
     <div class="loading-caption">
+
       <div class="loader" aria-hidden="true"></div>
+
       <p id="loadingMessage">Preparando seu espaço</p>
+
     </div>
+
   </div>
 
-
   <script src="../Js/home.js" defer></script>
+
 </body>
 
 </html>

@@ -6,10 +6,27 @@ document.getElementById("closeEditorBtn").addEventListener("click", () => {
     document.getElementById("drawerBackdrop").classList.remove("open");
     document.getElementById("editorDrawer").classList.remove("open");
 });
-document.getElementById("noteForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    addnote();
+
+//btn de dark mode e light mode criado com IA by copilot//
+
+document.getElementById("btn-backgroundMode").addEventListener("click", () => {
+    // 1. Alterna a classe no HTML (adiciona se não tiver, remove se já tiver)
+    document.documentElement.classList.toggle('modo-inverso');
+
+    // 2. Guarda o botão numa variável
+    let btn = document.getElementById("btn-backgroundMode");
+
+    // 3. Verifica se a classe 'modo-inverso' está ativa no momento
+    if (document.documentElement.classList.contains('modo-inverso')) {
+        // Se estiver ativa (Modo Escuro / Inverso)
+        btn.innerHTML = `<span class="nav-symbol">☀</span> Light Mode`;
+    } else {
+        // Se NÃO estiver ativa (Modo Normal / Claro)
+        btn.innerHTML = `<span class="nav-symbol">☾</span> Dark Mode`;
+    }
 });
+
+
 let data = new Date();
 
 let dia = String(data.getDate()).padStart(2, "0");
@@ -30,17 +47,8 @@ function addnote() {
     let titulo = document.getElementById("noteTitleInput").value
     let etiqueta = document.getElementById("noteTagsInput").value
     let nota = document.getElementById("noteBodyInput").value
-    let favoritos = false;
 
-    const checklist = document.getElementById("meuChecklist");
-
-    checklist.addEventListener("change", () => {
-        if (checklist.checked) {
-            return favoritos = true;
-        } else {
-            return favoritos = false;
-        }
-    });
+    let favoritos = document.getElementById("meuChecklist").checked; // quando o checklist está marcado recebe True , quando não está , recebe False//
 
     if (!etiqueta || !nota || !titulo) {
         showlOADING()
