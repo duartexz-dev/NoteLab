@@ -2,6 +2,10 @@ document.getElementById("newNoteBtn").addEventListener("click", () => {
     document.getElementById("drawerBackdrop").classList.add("open");
     document.getElementById("editorDrawer").classList.add("open");
 });
+document.getElementById("newNoteBtn2").addEventListener("click", () => {
+    document.getElementById("drawerBackdrop").classList.add("open");
+    document.getElementById("editorDrawer").classList.add("open");
+});
 document.getElementById("closeEditorBtn").addEventListener("click", () => {
     document.getElementById("drawerBackdrop").classList.remove("open");
     document.getElementById("editorDrawer").classList.remove("open");
@@ -42,6 +46,8 @@ let notes = [{
     data: dataAtual,
     favorito: false
 }]
+let gridnotas = document.getElementById("notesGrid");
+
 
 function addnote() {
     let titulo = document.getElementById("noteTitleInput").value

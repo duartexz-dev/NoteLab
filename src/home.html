@@ -200,7 +200,36 @@
 
             <div class="notes-grid" id="notesGrid"></div>
 
-            <div class="empty-state" id="emptyState" hidden>
+            <div class="note-modal-overlay" id="noteModal">
+                <div class="note-modal">
+
+                  <div class="note-modal-header">
+                    <span class="note-modal-label">NOTE DETAILS</span>
+
+                    <button class="close-note-modal" id="closeNoteModal">
+                      &times;
+                    </button>
+                  </div>
+
+                  <h2 id="modalNoteTitle">Título da nota</h2>
+
+                  <div class="note-modal-meta">
+                    <span id="modalNoteDate">Data de criação</span>
+                    <span id="modalNoteCategory">Categoria</span>
+                  </div>
+
+                  <div class="note-modal-tags" id="modalNoteTags"></div>
+
+                  <div class="note-modal-divider"></div>
+
+                  <div class="note-modal-content" id="modalNoteContent">
+                    Conteúdo da nota salva.
+                  </div>
+
+              </div>
+            </div>
+
+            <div class="empty-state" id="emptyState">
 
               <div class="empty-icon">⌕</div>
 
@@ -311,7 +340,7 @@
 
         as etiquetas por vírgulas.</p>
 
-      <div class="editor-bottom"><label class="favorite-toggle"><input type="checkbox" id="meuChecklist"> <span>☆
+      <div class="editor-bottom"><label class="favorite-toggle"><input type="checkbox" id="noteFavoriteInput"> <span>☆
 
             Guardar nas favoritas</span></label>
 
@@ -374,7 +403,7 @@
 
   </div>
 
-  <script src="../Js/home.js" defer></script>
+  <script src="../Js/brain-notes.js" defer></script>
 
 </body>
 

@@ -137,7 +137,11 @@
       }
       function renderNotes() {
         const filtered = getFilteredNotes();
-        elements.grid.innerHTML = filtered.map(renderNoteCard).join('');
+        let renderedNotes = '';
+        for (let index = 0; index < filtered.length; index++) {
+          renderedNotes += renderNoteCard(filtered[index]);
+        }
+        elements.grid.innerHTML = renderedNotes;
         elements.empty.hidden = filtered.length > 0;
         if (!filtered.length) {
           const noNotes = notes.length === 0;
