@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f8f2">
+  <meta name="description" content="Entre na NoteLab e mantenha suas ideias, notas e referências organizadas.">
+  <title>Entrar — NoteLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./styles/style.css">
+  <script src="./js/script.js" defer></script>
+</head>
+
+<body>
+  <main class="auth-layout">
+    <section class="form-panel" aria-labelledby="login-title">
+      <header class="site-header">
+        <a class="brand" href="#inicio" aria-label="NoteLab, início">
+          <span class="brand-mark" aria-hidden="true">N<span>.</span></span>
+          <span class="brand-name">NoteLab</span>
+        </a>
+        <span class="header-note">Seu segundo cérebro</span>
+      </header>
+
+      <div class="form-content" id="inicio">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> UM ESPAÇO PARA SUAS IDEIAS</div>
+        <h1 id="login-title">Bom ter você <span>de volta.</span></h1>
+        <p class="intro">Entre para continuar organizando suas ideias, estudos e referências em um só lugar.</p>
+
+        <form class="login-form" id="login-form" novalidate>
+          <div class="field-group">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="voce@exemplo.com" autocomplete="email" required>
+            <small class="field-error" id="email-error" aria-live="polite"></small>
+          </div>
+
+          <div class="field-group">
+            <label for="password">Senha</label>
+            <div class="password-wrap">
+              <input id="password" name="password" type="password" placeholder="Digite sua senha"
+                autocomplete="current-password" required>
+              <button class="password-toggle" id="password-toggle" type="button" aria-label="Mostrar senha"
+                aria-pressed="false">
+                <svg class="eye-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M2.5 12s3.3-6 9.5-6 9.5 6 9.5 6-3.3 6-9.5 6-9.5-6-9.5-6Z" stroke="currentColor"
+                    stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="12" cy="12" r="2.7" stroke="currentColor" stroke-width="1.7" />
+                </svg>
+              </button>
+            </div>
+            <small class="field-error" id="password-error" aria-live="polite"></small>
+          </div>
+
+
+          <button class="submit-button" type="submit">
+            <span>Entrar na NoteLab</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+          <p class="demo-note">Protótipo visual — a autenticação ainda não está conectada a um servidor.(mais
+            informações acesse o repositório open-souce da aplicação em <a
+              href="https://github.com/duartexz-dev/NoteLab">NoteLab</a></p>
+        </form>
+
+        <div class="signup-prompt">
+          Ainda não tem uma conta?
+          <button class="text-button signup-link" id="criarUmaContaDiv" type="button">Criar conta</button>
+        </div>
+      </div>
+
+
+
+
+
+      <div style="display: none;" class="form-content" id="inicio">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> UM ESPAÇO PARA SUAS IDEIAS</div>
+        <h1 id="login-title">Bom ter você por aqui <span>Bem Vindo.</span></h1>
+        <p class="intro">Crie uma conta para organizar suas ideias, estudos e referências em um só lugar.</p>
+
+        <form class="login-form" id="login-form" novalidate>
+          <div class="field-group">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="voce@exemplo.com" autocomplete="email" required>
+            <small class="field-error" id="email-error" aria-live="polite"></small>
+          </div>
+
+          <div class="field-group">
+            <label for="password">Senha</label>
+            <div class="password-wrap">
+              <input id="password" name="password" type="password" placeholder="Digite sua senha"
+                autocomplete="current-password" required>
+              <button class="password-toggle" id="password-toggle" type="button" aria-label="Mostrar senha"
+                aria-pressed="false">
+                <svg class="eye-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M2.5 12s3.3-6 9.5-6 9.5 6 9.5 6-3.3 6-9.5 6-9.5-6-9.5-6Z" stroke="currentColor"
+                    stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="12" cy="12" r="2.7" stroke="currentColor" stroke-width="1.7" />
+                </svg>
+              </button>
+            </div>
+            <small class="field-error" id="password-error" aria-live="polite"></small>
+          </div>
+
+
+          <button class="submit-button" type="submit">
+            <span>Entrar na NoteLab</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+          <p class="demo-note">Protótipo visual — a autenticação ainda não está conectada a um servidor.(mais
+            informações acesse o repositório open-souce da aplicação em <a
+              href="https://github.com/duartexz-dev/NoteLab">NoteLab</a></p>
+        </form>
+
+        <div class="signup-prompt">
+          Já tem uma conta?
+          <button class="text-button signup-link" id="btn-logarDIV" type="button">Criar conta</button>
+        </div>
+      </div>
+
+
+
+
+
+
+      <footer class="form-footer">
+        <span>© 2026 NoteLab</span>
+        <span class="footer-status"><span></span> Um lugar para pensar com clareza</span>
+      </footer>
+    </section>
+
+    <aside class="visual-panel" aria-label="Conheça os recursos da NoteLab">
+      <div class="visual-topline">
+        <span class="visual-kicker">MENOS RUÍDO. MAIS CLAREZA.</span>
+        <span class="online-indicator"><span></span> Seu espaço de ideias</span>
+      </div>
+
+      <div class="illustration-wrap">
+        <img class="hero-illustration" src="./assets/Meditação com UI Verde Minimalista.png"
+          alt="Ilustração de uma pessoa meditando ao lado de um cartão NoteLab com notas organizadas">
+      </div>
+
+      <div class="visual-copy">
+        <p class="visual-overline">PENSE. REGISTRE. CONECTE.</p>
+        <h2>Suas ideias merecem<br>um lugar para ficar.</h2>
+        <p class="visual-description">Guarde pensamentos, encontre conexões e transforme anotações soltas em
+          conhecimento.</p>
+        <div class="feature-list" aria-label="Funcionalidades da NoteLab">
+          <span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>Notas rápidas</span>
+          <span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>Tags e categorias</span>
+          <span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>Busca por palavra</span>
+        </div>
+      </div>
+
+      <div class="visual-bottomline">
+        <span>IDEIAS EM ORDEM, MENTE LIVRE.</span>
+        <span class="slide-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
+    </aside>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">NoteLab N.</title>
+  <rect x="4" y="4" width="120" height="120" rx="29" fill="#111210"/>
+  <text x="64" y="83" text-anchor="middle" font-family="Manrope, Arial, sans-serif" font-size="61" font-weight="800" letter-spacing="-5" fill="#ffffff">N.</text>
+</svg>
